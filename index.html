@@ -409,6 +409,31 @@
 </style>
 </head>
 <body>
+  
+<!-- The hidden audio element -->
+<audio id="bgMusic" loop>
+  <source src="videoplayback.weba" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  const music = document.getElementById("bgMusic");
+
+  // Function to start the music
+  function startMusic() {
+    music.play().then(() => {
+      // Once music successfully starts, remove the listeners so it doesn't restart on every click
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("touchstart", startMusic);
+    }).catch(error => {
+      console.log("Playback failed:", error);
+    });
+  }
+
+  // Listen for both desktop clicks and mobile touches anywhere on the screen
+  document.addEventListener("click", startMusic);
+  document.addEventListener("touchstart", startMusic);
+</script>
 
 <div class="floaters" id="floaters"></div>
 
