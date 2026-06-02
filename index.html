@@ -869,6 +869,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 revealEls.forEach(el => obs.observe(el));
 </script>
+  
 ```html
 <!-- Load Firebase Core App and Realtime Database compatibility scripts -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -885,7 +886,6 @@ revealEls.forEach(el => obs.observe(el));
     messagingSenderId: "756011288983",
     appId: "1:756011288983:web:e1435232e018e295161cd2"
   };
-
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
