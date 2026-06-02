@@ -98,15 +98,6 @@
     100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
   }
 
-  /* RINGS CANVAS */
-  #rings-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 90px;
-    pointer-events: none;
-    z-index: 10;
-  }
-
   /* HERO */
   #hero {
     position: relative;
@@ -497,8 +488,6 @@
 
 <div class="floaters" id="floaters"></div>
 
-<canvas id="rings-canvas"></canvas>
-
 <div class="lang-slider-container" id="langSlider">
   <div class="slider-knob"></div>
   <div class="lang-option active en-opt" id="opt-en">EN</div>
@@ -772,176 +761,6 @@ for (let i=0;i<22;i++) {
   el.style.cssText = `left:${Math.random()*96}%;font-size:${0.7+Math.random()*0.8}rem;color:rgba(200,151,58,${0.2+Math.random()*0.3});animation-duration:${dur}s;animation-delay:${delay}s;`;
   fc.appendChild(el);
 }
-
-// ── 3D RINGS ──
-(function() {
-  const canvas = document.getElementById('rings-canvas');
-  const ctx    = canvas.getContext('2d');
-  const RING_R = 26;   
-  const TUBE_W = 8;    
-  const RING_H_CANVAS = 90;
-
-  function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = RING_H_CANVAS;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function drawRing(cx, cy, r, flip) {
-    const tw = TUBE_W;
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, r, r * 0.38, 0, Math.PI, 2 * Math.PI);
-    ctx.lineWidth = tw;
-    ctx.strokeStyle = '#8a5e14';
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, r, r * 0.38, 0, 0, 2 * Math.PI);
-    ctx.lineWidth = tw + 4;
-    ctx.strokeStyle = 'rgba(200,151,58,0.12)';
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, r, r * 0.38, 0, 0, Math.PI);
-    ctx.lineWidth = tw;
-
-    const grad = ctx.createLinearGradient(cx - r, cy, cx + r, cy + r * 0.38);
-    grad.addColorStop(0,   '#b07d20');
-    grad.addColorStop(0.2, '#e8c97a');
-    grad.addColorStop(0.45,'#f5e9c8');
-    grad.addColorStop(0.65,'#c8973a');
-    grad.addColorStop(0.85,'#8a5e14');
-    grad.addColorStop(1,   '#c8973a');
-    ctx.strokeStyle = grad;
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, r, r * 0.38, 0, Math.PI, 2 * Math.PI);
-    ctx.lineWidth = tw;
-    const gradTop = ctx.createLinearGradient(cx - r, cy - r * 0.38, cx + r, cy);
-    gradTop.addColorStop(0,   '#a06818');
-    gradTop.addColorStop(0.3, '#e0b84a');
-    gradTop.addColorStop(0.5, '#fff5d0');
-    gradTop.addColorStop(0.7, '#d4a030');
-    gradTop.addColorStop(1,   '#8a5e14');
-    ctx.strokeStyle = gradTop;
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, r - tw * 0.1, r * 0.35, 0, 0, 2 * Math.PI);
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = 'rgba(80,40,0,0.18)';
-    ctx.stroke();
-
-    const joinAmount = window.ringJoinProgress || 0;
-    const fillGrad = ctx.createRadialGradient(cx, cy, r * 0.15, cx, cy, r);
-    fillGrad.addColorStop(0, `rgba(255,245,208,${0.55 * joinAmount})`);
-    fillGrad.addColorStop(0.45, `rgba(232,201,122,${0.4 * joinAmount})`);
-    fillGrad.addColorStop(1, `rgba(200,151,58,${0.15 * joinAmount})`);
-
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, r - tw * 0.9, r * 0.32, 0, 0, Math.PI * 2);
-    ctx.fillStyle = fillGrad;
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, r - tw * 1.2, r * 0.26, 0, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(232,201,122,${0.25 * joinAmount})`;
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.ellipse(cx, cy - r * 0.32, r * 0.28, r * 0.06, 0, 0, 2 * Math.PI);
-    ctx.fillStyle = 'rgba(255,245,200,0.55)';
-    ctx.fill();
-  }
-
-  function drawInterlinked(lx, rx, cy, progress) {
-    const gap = rx - lx;
-    if (gap > RING_R * 2.2) {
-      drawRing(lx, cy, RING_R, false);
-      drawRing(rx, cy, RING_R, true);
-    } else {
-      const r = RING_R;
-      const tw = TUBE_W;
-
-      ctx.beginPath();
-      ctx.ellipse(rx, cy, r, r*0.38, 0, Math.PI, 2*Math.PI);
-      ctx.lineWidth = tw;
-      ctx.strokeStyle = '#8a5e14';
-      ctx.stroke();
-
-      drawRing(lx, cy, r, false);
-
-      ctx.beginPath();
-      ctx.ellipse(rx, cy, r, r*0.38, 0, 0, Math.PI);
-      ctx.lineWidth = tw;
-      const grad = ctx.createLinearGradient(rx-r, cy, rx+r, cy+r*0.38);
-      grad.addColorStop(0,   '#b07d20');
-      grad.addColorStop(0.2, '#e8c97a');
-      grad.addColorStop(0.45,'#f5e9c8');
-      grad.addColorStop(0.65,'#c8973a');
-      grad.addColorStop(0.85,'#8a5e14');
-      grad.addColorStop(1,   '#c8973a');
-      ctx.strokeStyle = grad;
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.ellipse(rx, cy, r-tw*0.1, r*0.35, 0, 0, 2*Math.PI);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = 'rgba(80,40,0,0.18)';
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.ellipse(rx, cy - r*0.32, r*0.28, r*0.06, 0, 0, 2*Math.PI);
-      ctx.fillStyle = 'rgba(255,245,200,0.45)';
-      ctx.fill();
-    }
-  }
-
-  function getRingPositions() {
-    const rsvpEl = document.getElementById('rsvp');
-    const rsvpStart = rsvpEl.offsetTop - window.innerHeight * 0.8;
-    const progress = Math.min(1, Math.max(0, window.scrollY / Math.max(1, rsvpStart)));
-
-    const ww = window.innerWidth;
-    const cy = RING_H_CANVAS / 2;
-
-    const startL = RING_R + 18;
-    const startR = ww - RING_R - 18;
-
-    const centerX = ww / 2;
-    const endL = centerX - RING_R * 0.6;  
-    const endR = centerX + RING_R * 0.6;  
-
-    const ease = p => p < 0.5 ? 2*p*p : -1+(4-2*p)*p; 
-    const t = ease(progress);
-
-    const lx = startL + (endL - startL) * t;
-    const rx = startR + (endR - startR) * t;
-    const scale = 1 + t * 0.18;
-
-    return { lx, rx, cy, scale, progress: t };
-  }
-
-  function render() {
-    const { lx, rx, cy, scale, progress } = getRingPositions();
-    window.ringJoinProgress = progress < 0.9 ? progress : 1 - ((progress - 0.9) / 0.1) * 0.5;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    const midX = (lx + rx) / 2;
-    ctx.translate(midX, cy);
-    ctx.scale(scale, scale);
-    ctx.translate(-midX, -cy);
-
-    drawInterlinked(lx, rx, cy, scale);
-    ctx.restore();
-
-    requestAnimationFrame(render);
-  }
-  render();
-})();
 
 // ── SCROLL REVEAL ──
 const revealEls = document.querySelectorAll('.reveal');
