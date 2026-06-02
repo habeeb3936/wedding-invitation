@@ -4,21 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Faheema Hadiya & Mohammed Shaduli Ahsani — Wedding</title>
-<!-- Imported Anek Malayalam Font, Amiri (for Quran Arabic), Cormorant Garamond, and Jost -->
-<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400;500;600&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400;500;600&family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Jost:wght@300;400;500&family=Poppins:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root {
     --cream: #fdf8f0;
     --cream2: #f7efe0;
-    --gold: #c8973a;
+    --gold: #d4a574;
     --gold-light: #e8c97a;
-    --gold-pale: #f5e9c8;
+    --gold-pale: #faf3e8;
     --dark: #2a1f0e;
     --dark2: #4a3820;
-    --muted: #7a6040;
+    --muted: #8b7355;
     --white: #fff;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'Jost', sans-serif;
+    --accent: #b8860b;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Montserrat', sans-serif;
+    --display-font: 'Great Vibes', cursive;
     --malayalam-font: 'Anek Malayalam', sans-serif;
     --arabic-font: 'Amiri', serif;
   }
@@ -26,7 +27,13 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--cream);
+    background-color: var(--cream);
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(255,255,255,0.6) 0%, transparent 20%),
+      radial-gradient(circle at 90% 90%, rgba(250,244,236,0.6) 0%, transparent 25%),
+      repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 2px, transparent 6px);
+    background-blend-mode: overlay, overlay, normal;
+    background-attachment: fixed;
     color: var(--dark);
     font-family: var(--sans);
     font-weight: 300;
@@ -47,12 +54,38 @@
     font-family: var(--malayalam-font) !important;
   }
 
+  /* Keep couple names using the display font regardless of language class */
+  body[class*="lang-"] h1.couple-name,
+  body[class*="lang-"] h1.couple-name em,
+  body[class*="lang-"] h1.couple-name span {
+    font-family: var(--display-font) !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+  }
+
+  /* Keep Quranic Arabic font regardless of language class */
+  body[class*="lang-"] .quran-arabic,
+  body[class*="lang-"] .quran-box .quran-arabic {
+    font-family: var(--arabic-font) !important;
+    font-style: normal !important;
+    direction: rtl !important;
+    text-align: center !important;
+    unicode-bidi: isolate !important;
+  }
+
   /* FLOATERS */
   .floaters {
     position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
     pointer-events: none; z-index: 0; overflow: hidden;
   }
+  .floaters::before, .floaters::after {
+    content: '';
+    position: absolute; width: 420px; height: 420px; border-radius: 50%;
+    filter: blur(60px); pointer-events: none; z-index: 0; opacity: 0.95;
+  }
+  .floaters::before { left: -120px; top: -80px; background: radial-gradient(circle, rgba(212,165,116,0.12), rgba(212,165,116,0) 60%); }
+  .floaters::after  { right: -120px; bottom: -80px; background: radial-gradient(circle, rgba(200,151,58,0.10), rgba(200,151,58,0) 60%); }
   .floater {
     position: absolute; opacity: 0;
     animation: floatUp linear infinite;
@@ -83,13 +116,22 @@
     text-align: center;
     padding: 110px 24px 70px;
     overflow: hidden;
-    background: linear-gradient(160deg, #fdf3e3 0%, #f8e8c8 40%, #fdf8f0 100%);
+    background: linear-gradient(160deg, #fdf6ec 0%, #f7ead2 40%, #fdf8f0 100%);
+    box-shadow: inset 0 -40px 80px rgba(0,0,0,0.02);
   }
   #hero::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,151,58,0.08) 0%, transparent 70%);
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,165,116,0.08) 0%, transparent 70%);
   }
+
+#hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(circle at 20% 30%, rgba(212,165,116,0.06), transparent 20%),
+                    radial-gradient(circle at 80% 70%, rgba(212,165,116,0.05), transparent 25%);
+  pointer-events: none;
+}
 
   .hero-ornament {
     color: var(--gold); font-size: 1.1rem;
@@ -112,13 +154,14 @@
   .hero-divider-icon { color: var(--gold); font-size: 1.1rem; }
 
   h1.couple-name {
-    font-family: var(--serif);
+    font-family: var(--display-font);
     font-size: clamp(2.4rem, 6vw, 4.4rem);
     font-weight: 400; line-height: 1.2;
-    color: var(--dark); letter-spacing: 0.02em;
+    color: var(--dark); letter-spacing: -0.01em;
     position: relative; z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
   }
-  h1.couple-name em { font-style: italic; color: var(--gold); }
+  h1.couple-name em { font-style: normal; color: var(--accent); }
 
   .heart-join {
     display: block;
@@ -141,11 +184,12 @@
   /* Quran Ayat */
   .quran-box {
     margin: 36px auto 10px; max-width: 560px;
-    padding: 22px 28px;
-    border: 1px solid rgba(200,151,58,0.35);
-    border-radius: 2px;
-    background: rgba(255,255,255,0.55);
+    padding: 28px 36px;
+    border: 2px solid rgba(212,165,116,0.25);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(250,243,232,0.8) 0%, rgba(255,255,255,0.6) 100%);
     position: relative; z-index: 1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
   }
   .quran-arabic {
     font-family: var(--arabic-font) !important;
@@ -175,8 +219,8 @@
   }
   .section-title {
     font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 400; text-align: center; color: var(--dark);
-    margin-bottom: 10px; letter-spacing: 0.02em;
+    font-weight: 600; text-align: center; color: var(--dark);
+    margin-bottom: 10px; letter-spacing: -0.01em;
   }
   .section-rule {
     display: flex; align-items: center;
@@ -196,14 +240,16 @@
   }
   .detail-card {
     background: var(--white);
-    border: 1px solid rgba(200,151,58,0.2);
-    border-radius: 2px; padding: 32px 24px;
+    border: 1px solid rgba(212,165,116,0.15);
+    border-radius: 8px; padding: 32px 24px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
   .detail-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(200,151,58,0.12);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(212,165,116,0.15);
+    border-color: var(--gold);
   }
   .detail-icon {
     width: 48px; height: 48px; margin: 0 auto 16px;
@@ -212,8 +258,8 @@
     color: var(--gold); font-size: 1.3rem;
   }
   .detail-card h3 {
-    font-family: var(--serif); font-size: 1.5rem;
-    font-weight: 400; color: var(--dark); margin-bottom: 6px;
+    font-family: var(--serif); font-size: 1.6rem;
+    font-weight: 600; color: var(--dark); margin-bottom: 6px;
   }
   .detail-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; letter-spacing: 0.05em; }
 
@@ -222,8 +268,9 @@
   .rsvp-form {
     max-width: 560px; margin: 0 auto;
     background: var(--white);
-    border: 1px solid rgba(200,151,58,0.25);
-    border-radius: 2px; padding: 40px 36px;
+    border: 1px solid rgba(212,165,116,0.2);
+    border-radius: 8px; padding: 40px 36px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
   }
   @media (max-width: 600px) { .rsvp-form { padding: 28px 20px; } }
 
@@ -237,13 +284,13 @@
   .form-group input[type="tel"],
   .form-group textarea {
     width: 100%; padding: 12px 16px;
-    border: 1px solid rgba(200,151,58,0.3); border-radius: 2px;
+    border: 1px solid rgba(212,165,116,0.3); border-radius: 4px;
     background: var(--cream); font-family: var(--sans);
     font-size: 0.95rem; font-weight: 300; color: var(--dark);
-    transition: border-color 0.25s, box-shadow 0.25s; outline: none;
+    transition: all 0.25s ease; outline: none;
   }
   .form-group input:focus, .form-group textarea:focus {
-    border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,151,58,0.12);
+    border-color: var(--gold); box-shadow: 0 0 0 4px rgba(212,165,116,0.1); background: var(--white);
   }
   .form-group textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 
@@ -254,28 +301,33 @@
   }
   .counter-btn {
     width: 40px; height: 40px; border: none;
-    background: var(--gold-pale); color: var(--gold);
+    background: var(--gold-pale); color: var(--accent);
     font-size: 1.2rem; cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    transition: all 0.2s ease;
     display: flex; align-items: center; justify-content: center;
+    font-weight: 600;
   }
-  .counter-btn:hover { background: var(--gold); color: #fff; }
+  .counter-btn:hover { background: var(--gold); color: #fff; transform: scale(1.08); }
   .counter-val {
     width: 56px; text-align: center;
-    font-family: var(--serif); font-size: 1.3rem;
-    font-weight: 400; color: var(--dark); background: var(--white);
+    font-family: 'Poppins', sans-serif; font-size: 1.3rem;
+    font-weight: 600; color: var(--dark); background: var(--white);
     border-left: 1px solid rgba(200,151,58,0.25);
     border-right: 1px solid rgba(200,151,58,0.25); padding: 4px 0;
   }
   .submit-btn {
     width: 100%; padding: 15px;
-    background: var(--gold); color: var(--white);
-    border: none; border-radius: 2px; font-family: var(--sans);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+    color: var(--white);
+    border: none; border-radius: 4px; font-family: var(--sans);
     font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase;
-    cursor: pointer; transition: background 0.3s, transform 0.2s; margin-top: 8px;
+    cursor: pointer; transition: all 0.3s ease; margin-top: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(212,165,116,0.25);
   }
-  .submit-btn:hover { background: var(--dark2); transform: translateY(-1px); }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,165,116,0.35); }
   .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { background: var(--muted); cursor: not-allowed; opacity: 0.6; box-shadow: none; }
   .field-error { font-size: 0.75rem; color: #c0392b; margin-top: 5px; display: none; }
 
   /* SUMMARY */
@@ -285,12 +337,18 @@
     gap: 20px; max-width: 500px; margin: 0 auto;
   }
   .summary-card {
-    background: var(--white); border: 1px solid rgba(200,151,58,0.2);
-    border-radius: 2px; padding: 28px 20px; text-align: center;
+    background: var(--white); border: 1px solid rgba(212,165,116,0.15);
+    border-radius: 8px; padding: 28px 20px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+  }
+  .summary-card:hover {
+    box-shadow: 0 8px 24px rgba(212,165,116,0.12);
+    transform: translateY(-2px);
   }
   .summary-num {
-    font-family: var(--serif); font-size: 3rem;
-    font-weight: 300; color: var(--gold); line-height: 1; display: block;
+    font-family: 'Poppins', sans-serif; font-size: 3rem;
+    font-weight: 600; color: var(--gold); line-height: 1; display: block;
   }
   .summary-lbl {
     font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
@@ -410,49 +468,48 @@
 </head>
 <body>
   
-<!-- The hidden audio element -->
-<audio id="bgMusic" loop>
-  <source src="videoplayback.weba" type="audio/mpeg">
+<audio id="bgMusic" loop preload="metadata" volume="0.3">
+  <source src="videoplayback.weba" type="audio/webp">
+  <source src="videoplayback.ogg" type="audio/ogg">
+  <source src="videoplayback.mp3" type="audio/mpeg">
+  <source src="videoplayback.wav" type="audio/wav">
   Your browser does not support the audio element.
 </audio>
 
 <script>
-  const music = document.getElementById("bgMusic");
+  // Setup global application variables immediately on file execution
+  window.currentLang = 'en';
 
-  // Function to start the music
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.3;
+
   function startMusic() {
-    music.play().then(() => {
-      // Once music successfully starts, remove the listeners so it doesn't restart on every click
-      document.removeEventListener("click", startMusic);
-      document.removeEventListener("touchstart", startMusic);
-    }).catch(error => {
+    music.play().catch(error => {
       console.log("Playback failed:", error);
     });
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("touchstart", startMusic);
   }
 
-  // Listen for both desktop clicks and mobile touches anywhere on the screen
   document.addEventListener("click", startMusic);
   document.addEventListener("touchstart", startMusic);
 </script>
 
 <div class="floaters" id="floaters"></div>
 
-<!-- 3D Rings Canvas -->
 <canvas id="rings-canvas"></canvas>
 
-<!-- FLOATING LANGUAGE SLIDER (Scroll-fixed) -->
 <div class="lang-slider-container" id="langSlider">
   <div class="slider-knob"></div>
   <div class="lang-option active en-opt" id="opt-en">EN</div>
   <div class="lang-option ml-opt" id="opt-ml">മലയാളം</div>
 </div>
 
-<!-- HERO -->
 <section id="hero">
   <p class="hero-ornament reveal" id="invite-text">With Joy &amp; Gratitude We Invite You</p>
 
   <div class="quran-box reveal">
-    <p class="quran-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+    <p class="quran-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْکُنُوا إِلَیْهَا وَجَعَلَ بَیْنَکُم مَّوَدَّةً وَرَحْمَةً</p>
     <p class="quran-translation">"And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy."</p>
     <p class="quran-ref">— Surah Ar-Rum 30:21 —</p>
   </div>
@@ -475,7 +532,6 @@
   </div>
 </section>
 
-<!-- EVENT DETAILS -->
 <section id="details">
   <div class="section-inner">
     <p class="section-label reveal">The Celebration</p>
@@ -501,7 +557,6 @@
   </div>
 </section>
 
-<!-- RSVP FORM -->
 <section id="rsvp">
   <div class="section-inner">
     <p class="section-label reveal">Kindly Reply</p>
@@ -538,12 +593,11 @@
         <label>Dietary Restrictions / Special Notes <span style="color:var(--muted);font-size:0.65rem">(Optional)</span></label>
         <textarea id="notes" placeholder="Any dietary needs or notes for us…"></textarea>
       </div>
-      <button class="submit-btn" id="submit-rsvp-btn" onclick="submitRSVP()">Confirm Attendance</button>
+      <button class="submit-btn" id="submit-rsvp-btn">Confirm Attendance</button>
     </div>
   </div>
 </section>
 
-<!-- SUMMARY -->
 <section id="summary">
   <div class="section-inner">
     <p class="section-label reveal">Live Count</p>
@@ -580,9 +634,27 @@
   </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBA_93vokXSs4bJem5mnHnOGvUHDFOZ11w",
+    authDomain: "wedding-rsvp-951ae.firebaseapp.com",
+    databaseURL: "https://wedding-rsvp-951ae-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "wedding-rsvp-951ae",
+    storageBucket: "wedding-rsvp-951ae.firebasestorage.app",
+    messagingSenderId: "756011288983",
+    appId: "1:756011288983:web:e1435232e018e295161cd2"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+</script>
+
 <script>
 // ── COUNTERS ──
-const counts = { adults:1, children:0 };
+const counts = { adults: 1, children: 0 };
 function adjust(who, delta) {
   counts[who] = Math.max(0, counts[who] + delta);
   document.getElementById(who+'-val').textContent = counts[who];
@@ -590,25 +662,28 @@ function adjust(who, delta) {
 
 // ── RSVP & FIREBASE REAL-TIME SYNC ──
 
-// 1. This listener automatically runs whenever ANYONE submits an RSVP.
-// It recalculates the database total live across all open screens instantly.
+// Real-time synchronization updates
 database.ref('rsvps').on('value', (snapshot) => {
   let globalAdults = 0;
   let globalChildren = 0;
 
-  snapshot.forEach((childSnapshot) => {
-    const rsvpData = childSnapshot.val();
-    globalAdults += (parseInt(rsvpData.adults) || 0);
-    globalChildren += (parseInt(rsvpData.children) || 0);
-  });
+  if (snapshot.exists()) {
+    snapshot.forEach((childSnapshot) => {
+      const rsvpData = childSnapshot.val();
+      globalAdults += (parseInt(rsvpData.adults) || 0);
+      globalChildren += (parseInt(rsvpData.children) || 0);
+    });
+  }
 
-  // Dynamically update the visual counters on the website
   document.getElementById('total-adults').textContent = globalAdults;
   document.getElementById('total-children').textContent = globalChildren;
+}, (error) => {
+  console.error("Error reading database node paths:", error);
 });
 
-// 2. This function sends the user's input directly into your cloud database
-function submitRSVP() {
+// Primary form submission handling engine
+document.getElementById('submit-rsvp-btn').addEventListener('click', function submitRSVP() {
+  const btn = document.getElementById('submit-rsvp-btn');
   const name  = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const notes = document.getElementById('notes').value.trim();
@@ -617,16 +692,18 @@ function submitRSVP() {
   document.getElementById('phone-err').style.display = phone ? 'none' : 'block';
   if (!name || !phone) return;
 
-  // Push data safely into the Firebase database reference
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = window.currentLang === 'en' ? "Sending..." : "അയയ്ക്കുന്നു...";
+
   database.ref('rsvps').push({
     name: name,
     phone: phone,
-    adults: counts.adults,
-    children: counts.children,
+    adults: parseInt(counts.adults) || 0,
+    children: parseInt(counts.children) || 0,
     notes: notes,
     timestamp: new Date().toISOString()
   }).then(() => {
-    // Clear input fields after a successful cloud save
     document.getElementById('name').value  = '';
     document.getElementById('phone').value = '';
     document.getElementById('notes').value = '';
@@ -635,15 +712,19 @@ function submitRSVP() {
     document.getElementById('adults-val').textContent   = '1';
     document.getElementById('children-val').textContent = '0';
     
-    // Trigger the confirmation popup animation
+    btn.disabled = false;
+    btn.textContent = originalText;
+
     showSuccess();
   }).catch((error) => {
     console.error("Data could not be saved to Firebase:", error);
-    alert("Something went wrong saving your RSVP. Please check your internet connection.");
+    alert("Something went wrong saving your RSVP. Please check your connection.");
+    btn.disabled = false;
+    btn.textContent = originalText;
   });
-}
+});
 
-// ── SUCCESS ──
+// ── SUCCESS OVERLAYS ──
 function showSuccess() { document.getElementById('success-overlay').classList.add('show'); startConfetti(); }
 function closeSuccess() { document.getElementById('success-overlay').classList.remove('show'); stopConfetti(); }
 
@@ -869,29 +950,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 revealEls.forEach(el => obs.observe(el));
 </script>
-  
-```html
-<!-- Load Firebase Core App and Realtime Database compatibility scripts -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-<script>
-  // YOUR FIREBASE CONFIGURATION (Paste yours from the Firebase Console here)
-   // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBA_93vokXSs4bJem5mnHnOGvUHDFOZ11w",
-    authDomain: "wedding-rsvp-951ae.firebaseapp.com",
-    projectId: "wedding-rsvp-951ae",
-    storageBucket: "wedding-rsvp-951ae.firebasestorage.app",
-    messagingSenderId: "756011288983",
-    appId: "1:756011288983:web:e1435232e018e295161cd2"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const database = firebase.database();
-</script>
-  
 <script>
 const translations={
 en:{
@@ -928,7 +987,7 @@ ceremonyTitle:"വിവാഹ ചടങ്ങ്",
 ceremonyDesc:"അല്ലാഹുവിന്റെ നാമത്തിൽ അനുഗൃഹീതമായ ഒരു കൂട്ടായ്മ<br>ലളിതമായും സന്തോഷത്തോടെയും വസ്ത്രം ധരിക്കുക",
 reply:"ദയവായി അറിയിക്കുക",
 rsvp:"സാന്നിധ്യം അറിയിക്കുക",
-fullName:"പूर्ण നാമം",
+fullName:"പൂർണ്ണ നാമം",
 phone:"ഫോൺ നമ്പർ",
 adults:"മുതിർന്നവരുടെ എണ്ണം",
 children:"കുട്ടികളുടെ എണ്ണം",
@@ -944,13 +1003,11 @@ close:"അടയ്ക്കുക"
 }
 };
 
-let currentLang='en';
-
 document.getElementById('langSlider').addEventListener('click',()=>{
-  currentLang = currentLang === 'en' ? 'ml' : 'en';
-  const t = translations[currentLang];
+  window.currentLang = window.currentLang === 'en' ? 'ml' : 'en';
+  const t = translations[window.currentLang];
   
-  if(currentLang === 'ml') {
+  if(window.currentLang === 'ml') {
     document.body.classList.add('lang-ml');
     document.getElementById('opt-ml').classList.add('active');
     document.getElementById('opt-en').classList.remove('active');
@@ -983,26 +1040,6 @@ document.getElementById('langSlider').addEventListener('click',()=>{
   document.querySelector('.success-box p').textContent=t.thanksMsg;
   document.querySelector('.success-close').textContent=t.close;
 });
-</script>
-  
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBA_93vokXSs4bJem5mnHnOGvUHDFOZ11w",
-    authDomain: "wedding-rsvp-951ae.firebaseapp.com",
-    projectId: "wedding-rsvp-951ae",
-    storageBucket: "wedding-rsvp-951ae.firebasestorage.app",
-    messagingSenderId: "756011288983",
-    appId: "1:756011288983:web:e1435232e018e295161cd2"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
 </script>
   
 </body>
