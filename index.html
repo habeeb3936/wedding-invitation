@@ -588,25 +588,59 @@ function adjust(who, delta) {
   document.getElementById(who+'-val').textContent = counts[who];
 }
 
-// ── RSVP ──
-let totalAdults = 0, totalChildren = 0;
+// ── RSVP & FIREBASE REAL-TIME SYNC ──
+
+// 1. This listener automatically runs whenever ANYONE submits an RSVP.
+// It recalculates the database total live across all open screens instantly.
+database.ref('rsvps').on('value', (snapshot) => {
+  let globalAdults = 0;
+  let globalChildren = 0;
+
+  snapshot.forEach((childSnapshot) => {
+    const rsvpData = childSnapshot.val();
+    globalAdults += (parseInt(rsvpData.adults) || 0);
+    globalChildren += (parseInt(rsvpData.children) || 0);
+  });
+
+  // Dynamically update the visual counters on the website
+  document.getElementById('total-adults').textContent = globalAdults;
+  document.getElementById('total-children').textContent = globalChildren;
+});
+
+// 2. This function sends the user's input directly into your cloud database
 function submitRSVP() {
   const name  = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
+  const notes = document.getElementById('notes').value.trim();
+  
   document.getElementById('name-err').style.display  = name  ? 'none' : 'block';
   document.getElementById('phone-err').style.display = phone ? 'none' : 'block';
   if (!name || !phone) return;
-  totalAdults   += counts.adults;
-  totalChildren += counts.children;
-  document.getElementById('total-adults').textContent   = totalAdults;
-  document.getElementById('total-children').textContent = totalChildren;
-  document.getElementById('name').value  = '';
-  document.getElementById('phone').value = '';
-  document.getElementById('notes').value = '';
-  counts.adults = 1; counts.children = 0;
-  document.getElementById('adults-val').textContent   = '1';
-  document.getElementById('children-val').textContent = '0';
-  showSuccess();
+
+  // Push data safely into the Firebase database reference
+  database.ref('rsvps').push({
+    name: name,
+    phone: phone,
+    adults: counts.adults,
+    children: counts.children,
+    notes: notes,
+    timestamp: new Date().toISOString()
+  }).then(() => {
+    // Clear input fields after a successful cloud save
+    document.getElementById('name').value  = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('notes').value = '';
+    counts.adults = 1; 
+    counts.children = 0;
+    document.getElementById('adults-val').textContent   = '1';
+    document.getElementById('children-val').textContent = '0';
+    
+    // Trigger the confirmation popup animation
+    showSuccess();
+  }).catch((error) => {
+    console.error("Data could not be saved to Firebase:", error);
+    alert("Something went wrong saving your RSVP. Please check your internet connection.");
+  });
 }
 
 // ── SUCCESS ──
@@ -835,7 +869,29 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 revealEls.forEach(el => obs.observe(el));
 </script>
+```html
+<!-- Load Firebase Core App and Realtime Database compatibility scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
+<script>
+  // YOUR FIREBASE CONFIGURATION (Paste yours from the Firebase Console here)
+   // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBA_93vokXSs4bJem5mnHnOGvUHDFOZ11w",
+    authDomain: "wedding-rsvp-951ae.firebaseapp.com",
+    projectId: "wedding-rsvp-951ae",
+    storageBucket: "wedding-rsvp-951ae.firebasestorage.app",
+    messagingSenderId: "756011288983",
+    appId: "1:756011288983:web:e1435232e018e295161cd2"
+  };
+
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+</script>
+  
 <script>
 const translations={
 en:{
