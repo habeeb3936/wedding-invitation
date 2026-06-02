@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faheema Hadiya & Mohammed Shaduli Ahsani — Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f0;
+    --cream2: #f7efe0;
+    --gold: #c8973a;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e9c8;
+    --dark: #2a1f0e;
+    --dark2: #4a3820;
+    --muted: #7a6040;
+    --white: #fff;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* FLOATERS */
+  .floaters {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .floater {
+    position: absolute; opacity: 0;
+    animation: floatUp linear infinite;
+    font-size: 1.2rem; user-select: none;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.55; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* RINGS CANVAS */
+  #rings-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 90px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* HERO */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 110px 24px 70px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #fdf3e3 0%, #f8e8c8 40%, #fdf8f0 100%);
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,151,58,0.08) 0%, transparent 70%);
+  }
+
+  .hero-ornament {
+    color: var(--gold); font-size: 1.1rem;
+    letter-spacing: 0.35em; font-family: var(--sans);
+    font-weight: 300; opacity: 0.7;
+    margin-bottom: 18px; text-transform: uppercase;
+  }
+
+  .hero-divider {
+    display: flex; align-items: center;
+    gap: 14px; justify-content: center; margin: 18px 0;
+  }
+  .hero-divider span {
+    height: 1px; width: 60px;
+    background: linear-gradient(to right, transparent, var(--gold));
+  }
+  .hero-divider span:last-child {
+    background: linear-gradient(to left, transparent, var(--gold));
+  }
+  .hero-divider-icon { color: var(--gold); font-size: 1.1rem; }
+
+  h1.couple-name {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    font-weight: 400; line-height: 1.2;
+    color: var(--dark); letter-spacing: 0.02em;
+    position: relative; z-index: 1;
+  }
+  h1.couple-name em { font-style: italic; color: var(--gold); }
+
+  .heart-join {
+    display: block;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--gold); margin: 10px 0;
+    animation: heartbeat 2.2s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    30% { transform: scale(1.18); }
+    60% { transform: scale(1.08); }
+  }
+
+  .hero-sub {
+    font-family: var(--sans); font-size: 0.95rem;
+    font-weight: 300; color: var(--muted);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-top: 22px;
+  }
+
+  /* Quran Ayat */
+  .quran-box {
+    margin: 36px auto 10px; max-width: 560px;
+    padding: 22px 28px;
+    border: 1px solid rgba(200,151,58,0.35);
+    border-radius: 2px;
+    background: rgba(255,255,255,0.55);
+    position: relative; z-index: 1;
+  }
+  .quran-arabic {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 1.75rem);
+    color: var(--dark); line-height: 1.9;
+    direction: rtl; text-align: center;
+  }
+  .quran-translation {
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.88rem; color: var(--muted);
+    text-align: center; margin-top: 10px; line-height: 1.7;
+  }
+  .quran-ref {
+    text-align: center; font-size: 0.75rem;
+    color: var(--gold); letter-spacing: 0.12em;
+    margin-top: 8px; font-family: var(--sans); font-weight: 400;
+  }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+  .section-inner { max-width: 900px; margin: 0 auto; padding: 80px 24px; }
+  .section-label {
+    text-align: center; font-size: 0.72rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); font-family: var(--sans);
+    font-weight: 400; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400; text-align: center; color: var(--dark);
+    margin-bottom: 10px; letter-spacing: 0.02em;
+  }
+  .section-rule {
+    display: flex; align-items: center;
+    justify-content: center; gap: 12px; margin-bottom: 48px;
+  }
+  .section-rule::before, .section-rule::after {
+    content: ''; height: 1px; width: 50px; background: var(--gold-light);
+  }
+  .section-rule-icon { color: var(--gold); font-size: 0.95rem; }
+
+  /* EVENT DETAILS */
+  #details { background: var(--cream2); }
+  .details-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px; max-width: 700px; margin: 0 auto;
+  }
+  .detail-card {
+    background: var(--white);
+    border: 1px solid rgba(200,151,58,0.2);
+    border-radius: 2px; padding: 32px 24px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .detail-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(200,151,58,0.12);
+  }
+  .detail-icon {
+    width: 48px; height: 48px; margin: 0 auto 16px;
+    background: var(--gold-pale); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 1.3rem;
+  }
+  .detail-card h3 {
+    font-family: var(--serif); font-size: 1.5rem;
+    font-weight: 400; color: var(--dark); margin-bottom: 6px;
+  }
+  .detail-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; letter-spacing: 0.05em; }
+
+  /* RSVP */
+  #rsvp { background: var(--cream); }
+  .rsvp-form {
+    max-width: 560px; margin: 0 auto;
+    background: var(--white);
+    border: 1px solid rgba(200,151,58,0.25);
+    border-radius: 2px; padding: 40px 36px;
+  }
+  @media (max-width: 600px) { .rsvp-form { padding: 28px 20px; } }
+
+  .form-group { margin-bottom: 24px; }
+  .form-group label {
+    display: block; font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 8px; font-family: var(--sans); font-weight: 400;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="tel"],
+  .form-group textarea {
+    width: 100%; padding: 12px 16px;
+    border: 1px solid rgba(200,151,58,0.3); border-radius: 2px;
+    background: var(--cream); font-family: var(--sans);
+    font-size: 0.95rem; font-weight: 300; color: var(--dark);
+    transition: border-color 0.25s, box-shadow 0.25s; outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,151,58,0.12);
+  }
+  .form-group textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+  .counter-group {
+    display: flex; align-items: center;
+    border: 1px solid rgba(200,151,58,0.3);
+    border-radius: 2px; overflow: hidden; width: fit-content;
+  }
+  .counter-btn {
+    width: 40px; height: 40px; border: none;
+    background: var(--gold-pale); color: var(--gold);
+    font-size: 1.2rem; cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .counter-btn:hover { background: var(--gold); color: #fff; }
+  .counter-val {
+    width: 56px; text-align: center;
+    font-family: var(--serif); font-size: 1.3rem;
+    font-weight: 400; color: var(--dark); background: var(--white);
+    border-left: 1px solid rgba(200,151,58,0.25);
+    border-right: 1px solid rgba(200,151,58,0.25); padding: 4px 0;
+  }
+  .submit-btn {
+    width: 100%; padding: 15px;
+    background: var(--gold); color: var(--white);
+    border: none; border-radius: 2px; font-family: var(--sans);
+    font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.3s, transform 0.2s; margin-top: 8px;
+  }
+  .submit-btn:hover { background: var(--dark2); transform: translateY(-1px); }
+  .submit-btn:active { transform: translateY(0); }
+  .field-error { font-size: 0.75rem; color: #c0392b; margin-top: 5px; display: none; }
+
+  /* SUMMARY */
+  #summary { background: var(--cream2); }
+  .summary-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; max-width: 500px; margin: 0 auto;
+  }
+  .summary-card {
+    background: var(--white); border: 1px solid rgba(200,151,58,0.2);
+    border-radius: 2px; padding: 28px 20px; text-align: center;
+  }
+  .summary-num {
+    font-family: var(--serif); font-size: 3rem;
+    font-weight: 300; color: var(--gold); line-height: 1; display: block;
+  }
+  .summary-lbl {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-top: 8px; display: block;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 32px 24px;
+    font-size: 0.8rem; letter-spacing: 0.12em;
+    font-family: var(--sans); font-weight: 300;
+  }
+
+  /* SUCCESS */
+  #success-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(42,31,14,0.88); z-index: 1000;
+    align-items: center; justify-content: center; flex-direction: column;
+  }
+  #success-overlay.show { display: flex; }
+  .success-box {
+    background: var(--cream); border: 1px solid rgba(200,151,58,0.4);
+    border-radius: 2px; padding: 50px 44px; text-align: center;
+    max-width: 440px; width: 90%;
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    position: relative; z-index: 2;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .success-icon { font-size: 2.8rem; margin-bottom: 18px; }
+  .success-box h2 {
+    font-family: var(--serif); font-size: 2rem;
+    font-weight: 400; color: var(--dark); margin-bottom: 12px;
+  }
+  .success-box p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+  .success-close {
+    padding: 11px 28px; background: var(--gold); color: #fff;
+    border: none; border-radius: 2px; font-family: var(--sans);
+    font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.25s;
+  }
+  .success-close:hover { background: var(--dark2); }
+
+  #confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* SCROLL CUE */
+  .scroll-cue {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: var(--gold); font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; font-family: var(--sans); z-index: 2;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+  .scroll-cue svg { width: 20px; height: 20px; }
+</style>
+</head>
+<body>
+
+<div class="floaters" id="floaters"></div>
+
+<!-- 3D Rings Canvas -->
+<canvas id="rings-canvas"></canvas>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-ornament reveal">With Joy &amp; Gratitude We Invite You</p>
+
+  <div class="quran-box reveal">
+    <p class="quran-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+    <p class="quran-translation">"And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy."</p>
+    <p class="quran-ref">— Surah Ar-Rum 30:21 —</p>
+  </div>
+
+  <div class="hero-divider reveal">
+    <span></span><span class="hero-divider-icon">✦</span><span></span>
+  </div>
+
+  <h1 class="couple-name reveal">
+    <em>Faheema Hadiya</em>
+    <span class="heart-join">❤</span>
+    <em>Mohammed Shaduli Ahsani</em>
+  </h1>
+
+  <p class="hero-sub reveal">Unite in Holy Matrimony</p>
+
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</section>
+
+<!-- EVENT DETAILS -->
+<section id="details">
+  <div class="section-inner">
+    <p class="section-label reveal">The Celebration</p>
+    <h2 class="section-title reveal">Event Details</h2>
+    <div class="section-rule reveal"><span class="section-rule-icon">✦</span></div>
+    <div class="details-cards">
+      <div class="detail-card reveal">
+        <div class="detail-icon">📅</div>
+        <h3>9 July 2026</h3>
+        <p>Thursday<br>Join us for this blessed occasion</p>
+      </div>
+      <div class="detail-card reveal">
+        <div class="detail-icon">📍</div>
+        <h3>Puthanathani</h3>
+        <p>The Venue of Our Celebration<br>Kerala, India</p>
+      </div>
+      <div class="detail-card reveal" style="grid-column:1/-1;max-width:300px;margin:0 auto;width:100%">
+        <div class="detail-icon">🌙</div>
+        <h3>Nikah Ceremony</h3>
+        <p>A blessed union in the name of Allah<br>Dress modestly &amp; joyfully</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP FORM -->
+<section id="rsvp">
+  <div class="section-inner">
+    <p class="section-label reveal">Kindly Reply</p>
+    <h2 class="section-title reveal">RSVP</h2>
+    <div class="section-rule reveal"><span class="section-rule-icon">✦</span></div>
+    <div class="rsvp-form reveal">
+      <div class="form-group">
+        <label>Full Name <span style="color:#c0392b">*</span></label>
+        <input type="text" id="name" placeholder="Your full name">
+        <span class="field-error" id="name-err">Please enter your name.</span>
+      </div>
+      <div class="form-group">
+        <label>Phone Number <span style="color:#c0392b">*</span></label>
+        <input type="tel" id="phone" placeholder="+91 00000 00000">
+        <span class="field-error" id="phone-err">Please enter your phone number.</span>
+      </div>
+      <div class="form-group">
+        <label>Number of Adults</label>
+        <div class="counter-group">
+          <button class="counter-btn" onclick="adjust('adults',-1)">−</button>
+          <span class="counter-val" id="adults-val">1</span>
+          <button class="counter-btn" onclick="adjust('adults',1)">+</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Number of Children</label>
+        <div class="counter-group">
+          <button class="counter-btn" onclick="adjust('children',-1)">−</button>
+          <span class="counter-val" id="children-val">0</span>
+          <button class="counter-btn" onclick="adjust('children',1)">+</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Dietary Restrictions / Special Notes <span style="color:var(--muted);font-size:0.65rem">(Optional)</span></label>
+        <textarea id="notes" placeholder="Any dietary needs or notes for us…"></textarea>
+      </div>
+      <button class="submit-btn" onclick="submitRSVP()">Confirm Attendance</button>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section id="summary">
+  <div class="section-inner">
+    <p class="section-label reveal">Live Count</p>
+    <h2 class="section-title reveal">Attendance Summary</h2>
+    <div class="section-rule reveal"><span class="section-rule-icon">✦</span></div>
+    <div class="summary-cards reveal">
+      <div class="summary-card">
+        <span class="summary-num" id="total-adults">0</span>
+        <span class="summary-lbl">Adults Confirmed</span>
+      </div>
+      <div class="summary-card">
+        <span class="summary-num" id="total-children">0</span>
+        <span class="summary-lbl">Children Confirmed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:rgba(255,255,255,0.8);margin-bottom:10px;">
+    <em>Faheema Hadiya</em> &nbsp;❤&nbsp; <em>Mohammed Shaduli Ahsani</em>
+  </p>
+  <p>9 July 2026 &nbsp;·&nbsp; Puthanathani</p>
+  <p style="margin-top:12px;font-size:0.7rem;opacity:0.5;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ — With blessings upon this union</p>
+</footer>
+
+<div id="success-overlay">
+  <canvas id="confetti-canvas"></canvas>
+  <div class="success-box">
+    <div class="success-icon">💍</div>
+    <h2>JazakAllahu Khairan!</h2>
+    <p>Your RSVP has been received. We are so grateful you'll be sharing in our joy on this blessed day.<br><br>We look forward to celebrating with you — Insha'Allah!</p>
+    <button class="success-close" onclick="closeSuccess()">Close</button>
+  </div>
+</div>
+
+<script>
+// ── COUNTERS ──
+const counts = { adults:1, children:0 };
+function adjust(who, delta) {
+  counts[who] = Math.max(0, counts[who] + delta);
+  document.getElementById(who+'-val').textContent = counts[who];
+}
+
+// ── RSVP ──
+let totalAdults = 0, totalChildren = 0;
+function submitRSVP() {
+  const name  = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  document.getElementById('name-err').style.display  = name  ? 'none' : 'block';
+  document.getElementById('phone-err').style.display = phone ? 'none' : 'block';
+  if (!name || !phone) return;
+  totalAdults   += counts.adults;
+  totalChildren += counts.children;
+  document.getElementById('total-adults').textContent   = totalAdults;
+  document.getElementById('total-children').textContent = totalChildren;
+  document.getElementById('name').value  = '';
+  document.getElementById('phone').value = '';
+  document.getElementById('notes').value = '';
+  counts.adults = 1; counts.children = 0;
+  document.getElementById('adults-val').textContent   = '1';
+  document.getElementById('children-val').textContent = '0';
+  showSuccess();
+}
+
+// ── SUCCESS ──
+function showSuccess() { document.getElementById('success-overlay').classList.add('show'); startConfetti(); }
+function closeSuccess() { document.getElementById('success-overlay').classList.remove('show'); stopConfetti(); }
+
+// ── CONFETTI ──
+let confettiReq, pieces = [];
+function startConfetti() {
+  const cv = document.getElementById('confetti-canvas');
+  cv.width = window.innerWidth; cv.height = window.innerHeight;
+  const ctx = cv.getContext('2d');
+  pieces = [];
+  const colors = ['#c8973a','#e8c97a','#f5e9c8','#fff','#f7efe0','#2a1f0e'];
+  for (let i=0;i<130;i++) pieces.push({
+    x:Math.random()*cv.width, y:Math.random()*cv.height - cv.height,
+    w:Math.random()*10+4, h:Math.random()*6+3,
+    color:colors[Math.floor(Math.random()*colors.length)],
+    vy:Math.random()*3+1.5, vx:(Math.random()-0.5)*2,
+    rot:Math.random()*360, rotV:(Math.random()-0.5)*6
+  });
+  function draw() {
+    ctx.clearRect(0,0,cv.width,cv.height);
+    pieces.forEach(p => {
+      ctx.save(); ctx.translate(p.x+p.w/2,p.y+p.h/2); ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+      p.y+=p.vy; p.x+=p.vx; p.rot+=p.rotV;
+      if(p.y>cv.height){p.y=-10;p.x=Math.random()*cv.width;}
+    });
+    confettiReq = requestAnimationFrame(draw);
+  }
+  draw();
+}
+function stopConfetti() {
+  cancelAnimationFrame(confettiReq);
+  const cv = document.getElementById('confetti-canvas');
+  cv.getContext('2d').clearRect(0,0,cv.width,cv.height);
+}
+
+// ── FLOATERS ──
+const syms = ['✿','❀','✾','✦','✧','◇','❋','⁕','✽','❁','·','˖'];
+const fc = document.getElementById('floaters');
+for (let i=0;i<22;i++) {
+  const el = document.createElement('span');
+  el.className = 'floater';
+  el.textContent = syms[Math.floor(Math.random()*syms.length)];
+  const dur = 14+Math.random()*18, delay = -(Math.random()*dur);
+  el.style.cssText = `left:${Math.random()*96}%;font-size:${0.7+Math.random()*0.8}rem;color:rgba(200,151,58,${0.2+Math.random()*0.3});animation-duration:${dur}s;animation-delay:${delay}s;`;
+  fc.appendChild(el);
+}
+
+// ── 3D RINGS ──
+(function() {
+  const canvas = document.getElementById('rings-canvas');
+  const ctx    = canvas.getContext('2d');
+  const RING_R = 26;   // outer radius
+  const TUBE_W = 8;    // ring tube thickness
+  const RING_H_CANVAS = 90;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = RING_H_CANVAS;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Draw a single 3D gold ring using arc + conic gradient illusion
+  // cx,cy = center, r = ring radius, progress for depth
+  function drawRing(cx, cy, r, flip) {
+    // We'll draw the ring as an ellipse outline (toroidal look)
+    // using multiple arc passes to fake 3D shading
+    const tw = TUBE_W;
+
+    // --- back arc (top half hidden behind) ---
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, r, r * 0.38, 0, Math.PI, 2 * Math.PI);
+    ctx.lineWidth = tw;
+    ctx.strokeStyle = 'rgba(140,95,20,0.35)';
+    ctx.stroke();
+
+    // --- full ring base shading (outer glow) ---
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, r, r * 0.38, 0, 0, 2 * Math.PI);
+    ctx.lineWidth = tw + 4;
+    ctx.strokeStyle = 'rgba(200,151,58,0.12)';
+    ctx.stroke();
+
+    // --- ring main body gradient (simulate 3D tube) ---
+    // Bottom visible arc
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, r, r * 0.38, 0, 0, Math.PI);
+    ctx.lineWidth = tw;
+
+    const grad = ctx.createLinearGradient(cx - r, cy, cx + r, cy + r * 0.38);
+    grad.addColorStop(0,   '#b07d20');
+    grad.addColorStop(0.2, '#e8c97a');
+    grad.addColorStop(0.45,'#f5e9c8');
+    grad.addColorStop(0.65,'#c8973a');
+    grad.addColorStop(0.85,'#8a5e14');
+    grad.addColorStop(1,   '#c8973a');
+    ctx.strokeStyle = grad;
+    ctx.stroke();
+
+    // --- top visible arc (front highlight) ---
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, r, r * 0.38, 0, Math.PI, 2 * Math.PI);
+    ctx.lineWidth = tw;
+    const gradTop = ctx.createLinearGradient(cx - r, cy - r * 0.38, cx + r, cy);
+    gradTop.addColorStop(0,   '#a06818');
+    gradTop.addColorStop(0.3, '#e0b84a');
+    gradTop.addColorStop(0.5, '#fff5d0');
+    gradTop.addColorStop(0.7, '#d4a030');
+    gradTop.addColorStop(1,   '#8a5e14');
+    ctx.strokeStyle = gradTop;
+    ctx.stroke();
+
+    // --- inner shadow (depth) ---
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, r - tw * 0.1, r * 0.35, 0, 0, 2 * Math.PI);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(80,40,0,0.18)';
+    ctx.stroke();
+
+
+    // --- gold fill that increases as rings join ---
+    const joinAmount = window.ringJoinProgress || 0;
+
+    const fillGrad = ctx.createRadialGradient(
+      cx, cy, r * 0.15,
+      cx, cy, r
+    );
+
+    fillGrad.addColorStop(0, `rgba(255,245,208,${0.55 * joinAmount})`);
+    fillGrad.addColorStop(0.45, `rgba(232,201,122,${0.4 * joinAmount})`);
+    fillGrad.addColorStop(1, `rgba(200,151,58,${0.15 * joinAmount})`);
+
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, r - tw * 0.9, r * 0.32, 0, 0, Math.PI * 2);
+    ctx.fillStyle = fillGrad;
+    ctx.fill();
+
+    // center glow so the entire ring interior fills evenly
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, r - tw * 1.2, r * 0.26, 0, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(232,201,122,${0.25 * joinAmount})`;
+    ctx.fill();
+
+    // --- specular highlight dot at top ---
+    ctx.beginPath();
+    ctx.ellipse(cx, cy - r * 0.32, r * 0.28, r * 0.06, 0, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgba(255,245,200,0.55)';
+    ctx.fill();
+  }
+
+  // Draw the interlinked pair: left ring slightly in front on top-half,
+  // right ring slightly in front on bottom-half — creating the chain-link look
+  function drawInterlinked(lx, rx, cy, progress) {
+    const gap = rx - lx; // positive = separated
+
+    // When rings overlap (gap < 2*RING_R), we do the chain illusion:
+    // draw right ring back-half, then left ring full, then right ring front-half
+    if (gap > RING_R * 2.2) {
+      // Fully separate — just draw both
+      drawRing(lx, cy, RING_R, false);
+      drawRing(rx, cy, RING_R, true);
+    } else {
+      // Interlinked — paint in layers
+      const r = RING_R;
+      const tw = TUBE_W;
+
+      // 1) Right ring: back arc (top half)
+      ctx.beginPath();
+      ctx.ellipse(rx, cy, r, r*0.38, 0, Math.PI, 2*Math.PI);
+      ctx.lineWidth = tw;
+      ctx.strokeStyle = 'rgba(140,95,20,0.35)';
+      ctx.stroke();
+
+      // 2) Left ring full (in front on top)
+      drawRing(lx, cy, r, false);
+
+      // 3) Right ring: front bottom arc (over left ring on bottom)
+      ctx.beginPath();
+      ctx.ellipse(rx, cy, r, r*0.38, 0, 0, Math.PI);
+      ctx.lineWidth = tw;
+      const grad = ctx.createLinearGradient(rx-r, cy, rx+r, cy+r*0.38);
+      grad.addColorStop(0,   '#b07d20');
+      grad.addColorStop(0.2, '#e8c97a');
+      grad.addColorStop(0.45,'#f5e9c8');
+      grad.addColorStop(0.65,'#c8973a');
+      grad.addColorStop(0.85,'#8a5e14');
+      grad.addColorStop(1,   '#c8973a');
+      ctx.strokeStyle = grad;
+      ctx.stroke();
+
+      // 4) Right ring inner + specular
+      ctx.beginPath();
+      ctx.ellipse(rx, cy, r-tw*0.1, r*0.35, 0, 0, 2*Math.PI);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(80,40,0,0.18)';
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.ellipse(rx, cy - r*0.32, r*0.28, r*0.06, 0, 0, 2*Math.PI);
+      ctx.fillStyle = 'rgba(255,245,200,0.45)';
+      ctx.fill();
+    }
+  }
+
+  function getRingPositions() {
+    const rsvpEl = document.getElementById('rsvp');
+    const rsvpStart = rsvpEl.offsetTop - window.innerHeight * 0.8;
+    const progress = Math.min(1, Math.max(0, window.scrollY / Math.max(1, rsvpStart)));
+
+    const ww = window.innerWidth;
+    const cy = RING_H_CANVAS / 2;
+
+    // Start positions: rings near edges
+    const startL = RING_R + 18;
+    const startR = ww - RING_R - 18;
+
+    // End positions: rings overlap by half their diameter (classic linked rings)
+    const centerX = ww / 2;
+    const endL = centerX - RING_R * 0.6;  // left ring center
+    const endR = centerX + RING_R * 0.6;  // right ring center (overlap = 1.2R gap)
+
+    const ease = p => p < 0.5 ? 2*p*p : -1+(4-2*p)*p; // easeInOut
+    const t = ease(progress);
+
+    const lx = startL + (endL - startL) * t;
+    const rx = startR + (endR - startR) * t;
+    const scale = 1 + t * 0.18;
+
+    return { lx, rx, cy, scale, progress: t };
+  }
+
+  function render() {
+    const { lx, rx, cy, scale, progress } = getRingPositions();
+    window.ringJoinProgress =
+      progress < 0.9
+        ? progress
+        : 1 - ((progress - 0.9) / 0.1) * 0.5;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.save();
+    // Scale from center when joined
+    const midX = (lx + rx) / 2;
+    ctx.translate(midX, cy);
+    ctx.scale(scale, scale);
+    ctx.translate(-midX, -cy);
+
+    drawInterlinked(lx, rx, cy, scale);
+    ctx.restore();
+
+    requestAnimationFrame(render);
+  }
+  render();
+
+})();
+
+// ── SCROLL REVEAL ──
+const revealEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+}, { threshold: 0.1 });
+revealEls.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
